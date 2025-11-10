@@ -21,7 +21,7 @@ A aplicação utiliza o PostgreSQL (configurado via Supabase) como sistema de ge
 
   .Controle de Versão: Manutenção rigorosa de branches separadas para facilitar o desenvolvimento paralelo e a revisão de código em cada respectiva camada.
   
-#SQL para criar tabelas no supabase:
+💻SQL para criar tabelas no supabase:
 
 CREATE TABLE "Contato" (
     "ID" BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
