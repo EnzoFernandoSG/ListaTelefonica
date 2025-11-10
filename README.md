@@ -20,3 +20,24 @@ A aplicação utiliza o PostgreSQL (configurado via Supabase) como sistema de ge
   .Gerenciamento de Entidades Aninhadas: Implementação robusta da lógica de PUT (Alteração) para garantir a correta atualização, adição e remoção de Telefones aninhados dentro da entidade Contato no EF Core.
 
   .Controle de Versão: Manutenção rigorosa de branches separadas para facilitar o desenvolvimento paralelo e a revisão de código em cada respectiva camada.
+  
+#SQL para criar tabelas no supabase:
+
+CREATE TABLE "Contato" (
+    "ID" BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, 
+    "NOME" VARCHAR(100) NOT NULL,
+    "IDADE" SMALLINT
+);
+
+-- TABELA TELEFONE
+CREATE TABLE "Telefone" (
+    "IDCONTATO" BIGINT NOT NULL,
+    "ID" BIGINT GENERATED ALWAYS AS IDENTITY NOT NULL, 
+    "NUMERO" VARCHAR(16) NOT NULL,
+    
+  PRIMARY KEY ("IDCONTATO", "ID"), 
+    CONSTRAINT fk_telefone_contato 
+        FOREIGN KEY ("IDCONTATO") 
+        REFERENCES "Contato"("ID") 
+        ON DELETE CASCADE
+);
