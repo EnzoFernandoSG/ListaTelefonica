@@ -1,0 +1,18 @@
+# Binários e arquivos de build
+[Bb]in/
+[Oo]bj/
+
+# Arquivos de usuário e IDE
+.vs/
+*.user
+*.suo
+
+# NuGet
+.nuget/
+
+# Chaves de Configuração SENSÍVEIS
+appsettings.json 
+appsettings.*.json 
+
+# Diretório dos Logs
+Logs/
