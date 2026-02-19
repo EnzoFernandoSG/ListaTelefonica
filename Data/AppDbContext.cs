@@ -38,7 +38,7 @@ namespace AgendaAPI.Data
             {
                 entity.ToTable("Telefone");
 
-                // PK composta (opcional dependendo do seu BD)
+                // PK composta
                 entity.HasKey(t => new { t.ContatoId, t.Id });
 
                 entity.Property(t => t.ContatoId)
