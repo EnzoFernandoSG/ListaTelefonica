@@ -109,7 +109,10 @@ public async Task<IActionResult> Update(long id, [FromBody] ContatoAlteracaoDTO 
     contatoExistente.Idade = contatoDto.Idade;
 
     
-    var telefonesIdsRecebidos = contatoDto.Telefones.Where(t => t.Id.HasValue && t.Id.Value > 0).Select(t => t.Id.Value).ToList();
+    var telefonesIdsRecebidos = contatoDto.Telefones
+    .Where(t => t.Id is > 0)
+    .Select(t => t.Id ?? 0)
+    .ToList();
 
     contatoExistente.Telefones
         .Where(t => !telefonesIdsRecebidos.Contains(t.Id))

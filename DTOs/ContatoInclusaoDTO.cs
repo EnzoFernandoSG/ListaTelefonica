@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace AgendaAPI.DTOs{
-    public class ContatoInclusaoDTO{
+namespace AgendaAPI.DTOs
+{
+    public class ContatoInclusaoDTO
+    {
         [Required(ErrorMessage = "O nome é obrigatório.")]
         [MaxLength(100)]
-        public string Nome { get; set; }
+        public string Nome { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "A idade é obrigatória.")]
         [Range(1, 150, ErrorMessage = "A idade deve ser um valor válido.")]

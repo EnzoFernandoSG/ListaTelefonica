@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AgendaAPI.Models{
+namespace AgendaAPI.Models
+{
     [Table("Contato")]
-    public class Contato{
+    public class Contato
+    {
         [Key]
         [Column("ID")]
         public long Id { get; set; }
@@ -12,7 +14,7 @@ namespace AgendaAPI.Models{
         [Required]
         [MaxLength(100)]
         [Column("NOME")]
-        public string Nome { get; set; }
+        public string Nome { get; set; } = string.Empty;
 
         [Column("IDADE")]
         public short Idade { get; set; }

@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using AgendaAPI.Models;
-using System.Linq;
 
 namespace AgendaAPI.Data
 {
@@ -17,25 +16,50 @@ namespace AgendaAPI.Data
 
             modelBuilder.Entity<Contato>(entity =>
             {
+                entity.ToTable("Contato");
+
                 entity.HasKey(c => c.Id);
-                entity.Property(c => c.Id).HasColumnName("ID").HasColumnType("bigint");
-                entity.Property(c => c.Nome).HasColumnName("NOME").HasMaxLength(100);
-                entity.Property(c => c.Idade).HasColumnName("IDADE").HasColumnType("smallint");
+
+                entity.Property(c => c.Id)
+                      .HasColumnName("ID")
+                      .HasColumnType("bigint");
+
+                entity.Property(c => c.Nome)
+                      .HasColumnName("NOME")
+                      .HasMaxLength(100)
+                      .IsRequired();
+
+                entity.Property(c => c.Idade)
+                      .HasColumnName("IDADE")
+                      .HasColumnType("smallint");
             });
 
-            modelBuilder.Entity<Telefone>(entity =>{
+            modelBuilder.Entity<Telefone>(entity =>
+            {
+                entity.ToTable("Telefone");
 
-                entity.HasKey(t => t.Id); 
+                // PK composta (opcional dependendo do seu BD)
+                entity.HasKey(t => new { t.ContatoId, t.Id });
 
-                entity.Property(t => t.ContatoId).HasColumnName("IDCONTATO").HasColumnType("bigint");
-                entity.Property(t => t.Id).HasColumnName("ID").HasColumnType("bigint");
-                entity.Property(t => t.Numero).HasColumnName("NUMERO").HasMaxLength(16);
+                entity.Property(t => t.ContatoId)
+                      .HasColumnName("IDCONTATO")
+                      .HasColumnType("bigint")
+                      .IsRequired();
+
+                entity.Property(t => t.Id)
+                      .HasColumnName("ID")
+                      .HasColumnType("bigint");
+
+                entity.Property(t => t.Numero)
+                      .HasColumnName("NUMERO")
+                      .HasMaxLength(16)
+                      .IsRequired();
 
                 entity.HasOne(t => t.Contato)
                       .WithMany(c => c.Telefones)
                       .HasForeignKey(t => t.ContatoId)
                       .OnDelete(DeleteBehavior.Cascade)
-                      .HasConstraintName("fk_telefone_contato"); 
+                      .HasConstraintName("fk_telefone_contato");
             });
         }
     }

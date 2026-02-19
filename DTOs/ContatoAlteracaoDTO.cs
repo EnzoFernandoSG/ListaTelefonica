@@ -1,23 +1,25 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace AgendaAPI.DTOs{
-    public class TelefoneAlteracaoDTO{
-        public long? Id { get; set; } 
-        
+namespace AgendaAPI.DTOs
+{
+    public class TelefoneAlteracaoDTO
+    {
+        public long? Id { get; set; }
+
         [Required]
         [MaxLength(16)]
-        public string Numero { get; set; }
-        
+        public string Numero { get; set; } = string.Empty;
     }
 
-    public class ContatoAlteracaoDTO{
+    public class ContatoAlteracaoDTO
+    {
         [Required]
         public long Id { get; set; }
-        
+
         [Required]
         [MaxLength(100)]
-        public string Nome { get; set; }
+        public string Nome { get; set; } = string.Empty;
 
         [Required]
         public short Idade { get; set; }

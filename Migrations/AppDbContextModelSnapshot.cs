@@ -23,46 +23,47 @@ namespace AgendaAPI.Migrations
 
             modelBuilder.Entity("AgendaAPI.Models.Contato", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("bigint")
+                        .HasColumnName("ID");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("Idade")
-                        .HasColumnType("integer");
+                    b.Property<short>("Idade")
+                        .HasColumnType("smallint")
+                        .HasColumnName("IDADE");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("NOME");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Contatos");
+                    b.ToTable("Contato", (string)null);
                 });
 
             modelBuilder.Entity("AgendaAPI.Models.Telefone", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                    b.Property<long>("ContatoId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("IDCONTATO");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ContatoId")
-                        .HasColumnType("integer");
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint")
+                        .HasColumnName("ID");
 
                     b.Property<string>("Numero")
                         .IsRequired()
                         .HasMaxLength(16)
-                        .HasColumnType("character varying(16)");
+                        .HasColumnType("character varying(16)")
+                        .HasColumnName("NUMERO");
 
-                    b.HasKey("Id");
+                    b.HasKey("ContatoId", "Id");
 
-                    b.HasIndex("ContatoId");
-
-                    b.ToTable("Telefones");
+                    b.ToTable("Telefone", (string)null);
                 });
 
             modelBuilder.Entity("AgendaAPI.Models.Telefone", b =>
@@ -71,7 +72,8 @@ namespace AgendaAPI.Migrations
                         .WithMany("Telefones")
                         .HasForeignKey("ContatoId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_telefone_contato");
 
                     b.Navigation("Contato");
                 });

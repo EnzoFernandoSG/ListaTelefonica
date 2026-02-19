@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AgendaAPI.Models{
+namespace AgendaAPI.Models
+{
     [Table("Telefone")]
-    public class Telefone{
+    public class Telefone
+    {
         [Column("IDCONTATO")]
         public long ContatoId { get; set; }
 
@@ -14,8 +16,8 @@ namespace AgendaAPI.Models{
         [Required]
         [MaxLength(16)]
         [Column("NUMERO")]
-        public string Numero { get; set; }
+        public string Numero { get; set; } = string.Empty;
 
-        public Contato Contato { get; set; }
+        public Contato Contato { get; set; } = null!;
     }
 }
