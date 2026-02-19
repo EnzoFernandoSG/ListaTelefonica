@@ -1,9 +1,7 @@
 using AgendaAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
-
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins"; 
-
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>{
@@ -31,10 +29,7 @@ if (app.Environment.IsDevelopment()){
 }
 
 app.UseHttpsRedirection();
-
 app.UseCors(MyAllowSpecificOrigins);
-
 app.UseAuthorization();
 app.MapControllers();
-
 app.Run();
